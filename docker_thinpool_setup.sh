@@ -82,9 +82,13 @@ else
   DEFERRED_DELETION="false"
 fi
 
-# stop docker
-echo -e "\nEnsuring docker is stopped"
-systemctl stop docker
+# check if Docker is installed
+if docker -v > /dev/null 2>&1
+then
+  # stop docker
+  echo -e "\nEnsuring docker is stopped"
+  systemctl stop docker
+fi
 
 # check to see if /var/lib/docker exists
 if [ -d "/var/lib/docker" ]
